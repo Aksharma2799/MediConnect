@@ -8,7 +8,7 @@ const {
   deleteContact,
   getContactStats,
 } = require("../controllers/contactController");
-const { verifyToken, authorize } = require("../middleware/auth");
+const { authenticate, authorize } = require("../middleware/auth");
 
 /**
  * Public route - no authentication required
@@ -20,23 +20,23 @@ router.post("/", createContact);
  * Protected routes - admin only
  */
 // Get all contacts
-router.get("/", authorize("admin"), getAllContacts);
+router.get("/", authenticate, authorize("admin"), getAllContacts);
 
 // Get contact statistics
-router.get("/stats/summary", authorize("admin"), getContactStats);
+router.get("/stats/summary", authenticate, authorize("admin"), getContactStats);
 
 // Get single contact
-router.get("/:id", verifyToken, getContactById);
+router.get("/:id", authenticate, getContactById);
 
 // Update contact (admin, clinic_owner, doctor can respond)
 router.put(
   "/:id",
-  verifyToken,
+  authenticate,
   authorize("admin", "clinic_owner", "doctor"),
-  updateContact,
+  updateContact
 );
 
 // Delete contact (admin only)
-router.delete("/:id", verifyToken, authorize("admin"), deleteContact);
+router.delete("/:id", authenticate, authorize("admin"), deleteContact);
 
 module.exports = router;

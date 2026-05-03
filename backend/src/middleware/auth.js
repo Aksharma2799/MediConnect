@@ -29,6 +29,7 @@ const auth = async (req, res, next) => {
     }
 
     req.userId = decoded.userId;
+    req.user = { id: decoded.userId };
     next();
   } catch (error) {
     logger.error("Auth middleware error:", error);
@@ -42,7 +43,9 @@ const auth = async (req, res, next) => {
   }
 };
 
-const requireRole = (...roles) => {
+const authenticate = auth;
+
+const authorize = (...roles) => {
   return async (req, res, next) => {
     try {
       const User = require("../models/User");
@@ -73,4 +76,8 @@ const requireRole = (...roles) => {
   };
 };
 
-module.exports = { auth, requireRole };
+const requireRole = (...roles) => {
+  return authorize(...roles);
+};
+
+module.exports = { auth, authenticate, authorize, requireRole };

@@ -409,13 +409,4 @@ async function sendResponseEmail(contact) {
     logger.error("Failed to send response email", { error: error.message });
     throw error;
   }
-}
-
-module.exports = {
-  createContact,
-  getAllContacts,
-  getContactById,
-  updateContact,
-  deleteContact,
-  getContactStats,
 };

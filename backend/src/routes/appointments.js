@@ -1,19 +1,25 @@
-const express = require('express');
-const router = express.Router();
-const { auth } = require('../middleware/auth');
+const router = require("express").Router();
+const appointmentController = require("../controllers/appointmentController");
+const { authenticate } = require("../middleware/auth");
 
-router.get('/', auth, async (req, res) => {
-  try {
-    res.status(200).json({
-      success: true,
-      message: 'Appointments endpoint - Coming soon'
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: { code: 'INTERNAL_ERROR', message: error.message }
-    });
-  }
-});
+// All appointment routes require authentication
+router.post("/", authenticate, appointmentController.createAppointment);
+router.get(
+  "/my-appointments",
+  authenticate,
+  appointmentController.getMyAppointments,
+);
+router.get("/:id", authenticate, appointmentController.getAppointmentById);
+router.put("/:id", authenticate, appointmentController.updateAppointmentStatus);
+router.post(
+  "/:id/reschedule",
+  authenticate,
+  appointmentController.rescheduleAppointment,
+);
+router.post(
+  "/:id/cancel",
+  authenticate,
+  appointmentController.cancelAppointment,
+);
 
 module.exports = router;

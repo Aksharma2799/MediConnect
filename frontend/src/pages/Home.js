@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Activity, Menu, X, ChevronDown } from "lucide-react";
+import { Activity, Menu, X, ChevronDown, User, Heart, MessageSquare, MapPin } from "lucide-react";
 
 function Home() {
   const navigate = useNavigate();
@@ -33,17 +33,26 @@ function Home() {
             <div className="hidden md:flex items-center space-x-8">
               <button
                 onClick={() => navigate("/")}
-                className="text-gray-700 hover:text-indigo-600 font-medium"
+                className="text-gray-700 hover:text-indigo-600 font-medium transition"
               >
                 Home
               </button>
-              <button className="text-gray-700 hover:text-indigo-600 font-medium">
+              <button 
+                onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-gray-700 hover:text-indigo-600 font-medium transition"
+              >
                 Services
               </button>
-              <button className="text-gray-700 hover:text-indigo-600 font-medium">
+              <button 
+                onClick={() => document.getElementById("why-choose")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-gray-700 hover:text-indigo-600 font-medium transition"
+              >
                 About Us
               </button>
-              <button className="text-gray-700 hover:text-indigo-600 font-medium">
+              <button
+                onClick={() => navigate("/contact")}
+                className="text-gray-700 hover:text-indigo-600 font-medium transition"
+              >
                 Contact
               </button>
 
@@ -51,33 +60,53 @@ function Home() {
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 font-medium"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-indigo-50 transition"
                 >
-                  <span>{isAuth ? "Account" : "User"}</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <User className="w-5 h-5 text-indigo-600" />
+                  <span className="text-gray-700 font-medium">{isAuth ? "Account" : "User"}</span>
+                  <ChevronDown className="w-4 h-4 text-gray-600" />
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 border border-gray-200">
                     {isAuth ? (
                       <>
                         <button
                           onClick={() => {
-                            navigate("/patient-dashboard");
+                            navigate("/patient-home");
                             setUserMenuOpen(false);
                           }}
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50"
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition"
                         >
-                          Dashboard
+                          📍 Dashboard
                         </button>
+                        <button
+                          onClick={() => {
+                            navigate("/bookings");
+                            setUserMenuOpen(false);
+                          }}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition"
+                        >
+                          📅 My Bookings
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate("/profile");
+                            setUserMenuOpen(false);
+                          }}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition"
+                        >
+                          👤 Profile
+                        </button>
+                        <hr className="my-1" />
                         <button
                           onClick={() => {
                             handleLogout();
                             setUserMenuOpen(false);
                           }}
-                          className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
+                          className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition"
                         >
-                          Logout
+                          🚪 Logout
                         </button>
                       </>
                     ) : (
@@ -87,17 +116,25 @@ function Home() {
                             navigate("/login");
                             setUserMenuOpen(false);
                           }}
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50"
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition"
                         >
-                          Login
+                          🔑 Login
                         </button>
                         <button
                           onClick={() => {
                             navigate("/register");
                             setUserMenuOpen(false);
                           }}
-                          className="block w-full text-left px-4 py-2 text-indigo-600 hover:bg-indigo-50"
+                          className="block w-full text-left px-4 py-2 text-indigo-600 hover:bg-indigo-50 transition"
                         >
+                          ✏️ Register
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
                           Register
                         </button>
                       </>

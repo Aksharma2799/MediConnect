@@ -47,7 +47,10 @@ app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/users", require("./routes/users"));
 app.use("/api/v1/doctors", require("./routes/doctors"));
 app.use("/api/v1/appointments", require("./routes/appointments"));
+app.use("/api/v1/health", require("./routes/health"));
+app.use("/api/v1/pharmacies", require("./routes/pharmacies"));
 app.use("/api/v1/payments", require("./routes/payments"));
+app.use("/api/v1/contacts", require("./routes/contacts"));
 
 // 404 Handler
 app.use((req, res) => {

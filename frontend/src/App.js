@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
+import PatientHome from "./pages/PatientHome";
 import PatientDashboard from "./pages/PatientDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import ClinicDashboard from "./pages/ClinicDashboard";
@@ -43,6 +44,14 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           {/* Role-based dashboards */}
+          <Route
+            path="/patient-home"
+            element={
+              <RoleBasedRoute roleRequired="patient">
+                <PatientHome />
+              </RoleBasedRoute>
+            }
+          />
           <Route
             path="/patient-dashboard"
             element={
