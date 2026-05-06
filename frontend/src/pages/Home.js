@@ -135,14 +135,6 @@ function Home() {
                 )}
               </div>
             </div>
-                          Register
-                        </button>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -165,39 +157,75 @@ function Home() {
                   navigate("/");
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded"
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
               >
-                Home
+                🏠 Home
               </button>
-              <button className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded">
-                Services
+              <button 
+                onClick={() => {
+                  document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
+              >
+                🏥 Services
               </button>
-              <button className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded">
-                About Us
+              <button 
+                onClick={() => {
+                  document.getElementById("why-choose")?.scrollIntoView({ behavior: "smooth" });
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
+              >
+                ℹ️ About Us
               </button>
-              <button className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded">
-                Contact
+              <button
+                onClick={() => {
+                  navigate("/contact");
+                  setMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
+              >
+                📞 Contact
               </button>
-              <div className="border-t pt-2">
+              <div className="border-t pt-2 mt-2">
                 {isAuth ? (
                   <>
                     <button
                       onClick={() => {
-                        navigate("/patient-dashboard");
+                        navigate("/patient-home");
                         setMobileMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded"
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
                     >
-                      Dashboard
+                      📍 Dashboard
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigate("/bookings");
+                        setMobileMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
+                    >
+                      📅 My Bookings
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigate("/profile");
+                        setMobileMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
+                    >
+                      👤 Profile
                     </button>
                     <button
                       onClick={() => {
                         handleLogout();
                         setMobileMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded"
+                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded transition"
                     >
-                      Logout
+                      🚪 Logout
                     </button>
                   </>
                 ) : (
@@ -207,18 +235,18 @@ function Home() {
                         navigate("/login");
                         setMobileMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded"
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 rounded transition"
                     >
-                      Login
+                      🔑 Login
                     </button>
                     <button
                       onClick={() => {
                         navigate("/register");
                         setMobileMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded"
+                      className="block w-full text-left px-4 py-2 text-indigo-600 hover:bg-indigo-50 rounded transition"
                     >
-                      Register
+                      ✏️ Register
                     </button>
                   </>
                 )}

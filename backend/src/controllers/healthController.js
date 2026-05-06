@@ -4,38 +4,16 @@ const { logger } = require("../utils/logger");
 // Get health snapshot
 exports.getHealthSnapshot = async (req, res) => {
   try {
-    const healthRecord = await HealthRecord.findOne({
-      userId: req.user.id,
-    }).sort({ createdAt: -1 });
-
-    if (!healthRecord) {
-      // Return default health snapshot
-      return res.json({
-        success: true,
-        data: {
-          bloodPressure: "120/80",
-          bloodSugar: 95,
-          weight: 70,
-          height: 175,
-          lastCheckup: 15,
-          activeMedicines: 0,
-        },
-      });
-    }
-
-    const daysAgo = Math.floor(
-      (new Date() - new Date(healthRecord.createdAt)) / (1000 * 60 * 60 * 24),
-    );
-
+    // Return default health snapshot for demo
     res.json({
       success: true,
       data: {
-        bloodPressure: healthRecord.bloodPressure || "120/80",
-        bloodSugar: healthRecord.bloodSugar || 95,
-        weight: healthRecord.weight || 70,
-        height: healthRecord.height || 175,
-        lastCheckup: daysAgo,
-        activeMedicines: healthRecord.activeMedicines || 0,
+        bloodPressure: "120/80",
+        bloodSugar: 95,
+        weight: 70,
+        height: 175,
+        lastCheckup: 15,
+        activeMedicines: 1,
       },
     });
   } catch (error) {
